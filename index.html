@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My code</title>
+  
+  <style>
+    .body { display: flex; overflow: visible; box-sizing: border-box; flex-flow: column; justify-content: center; align-items: center; gap: 0px; object-fit: fill; object-position: 100% 0%; }
+    .section-2 { position: static; inset: 0%; display: flex; overflow: visible; width: 100%; height: auto; min-height: 100vh; flex-flow: column; justify-content: center; align-items: center; gap: 0; cursor: text; object-fit: fill; position: relative; }
+    h1 { text-transform: uppercase; font-size: 35px; }
+    .text-span { font-family: "Open Sans", sans-serif; font-size: 15px; font-weight: 400; }
+    .search-2 { display: flex; width: 100%; margin-bottom: 0px; flex-flow: column; justify-content: center; align-items: center; gap: 21px; position: relative; }
+    .search-input-2 { width: 540px; height: 50px; padding-left: 20px; border: 3px solid black; border-radius: 73px; box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px; color: rgb(73, 80, 87); font-size: 17px; outline: none; }
+    .div-block { display: flex; width: 55px; height: 50px; margin-top: -50px; margin-right: -485px; justify-content: center; align-items: center; border-top-right-radius: 50px; border-bottom-right-radius: 50px; background-color: rgb(0, 0, 0); cursor: pointer; z-index: 10; }
+    .image-2 { width: auto; height: 25px; margin-right: 10px; }
+    .section-3 { display: flex; width: 100%; padding-top: 40px; padding-bottom: 20px; flex-flow: column; align-items: center; gap: 10px; }
+    .div-block-2 { display: flex; gap: 20px; }
+    .link-block { width: 30px; height: 30px; }
+    .image-3 { width: 100%; height: 100%; }
+    .live-results { position: absolute; top: 55px; width: 500px; background: white; border: 2px solid black; border-radius: 15px; z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 200px; overflow-y: auto; }
+    .res-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; font-family: sans-serif; display: flex; justify-content: space-between; align-items: center; color: black; }
+    .res-item:hover { background: #f8f8f8; }
+    #statusMsg { position: absolute; bottom: 100px; font-family: sans-serif; font-weight: bold; font-size: 14px; display: none; background: rgba(255,255,255,0.8); padding: 5px 15px; border-radius: 20px; }
+
+    .explore-title { font-family: sans-serif; text-transform: uppercase; font-size: 20px; margin-top: 60px; font-weight: bold; }
+    .codes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 80%; margin-top: 20px; }
+    .code-card { padding: 20px; border-radius: 15px; background: #fff; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; cursor: pointer; font-family: sans-serif; transition: 0.3s; }
+    .code-card:hover { transform: translateY(-5px); border: 1px solid #000; }
+    
+    .see-more-btn { padding: 8px 25px; background: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-family: sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin: 30px 0 50px 0; }
+    
+    @media screen and (max-width: 767px) { .search-input-2 { width: 450px; } .div-block { margin-right: -397px; } .live-results { width: 400px; } .codes-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media screen and (max-width: 479px) { .search-input-2 { width: 250px; } .div-block { margin-right: -195px; } .live-results { width: 220px; } h1 { font-size: 28px; } .codes-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body class="body">
+  <section class="section-2">
+    <h1>get <span class="text-span">mycode</span></h1>
+    
+    <div class="search-2">
+      <input class="search-input-2" placeholder="Search ID..." type="search" oninput="liveSearch()">
+      <div id="liveBox" class="live-results"></div>
+    </div>
+    
+    <div class="div-block" onclick="handleSearch()">
+      <img class="image-2" src="search.png" alt="">
+    </div>
+
+    <section class="section-3">
+      <div style="font-family: sans-serif; text-transform: uppercase;">my social media</div>
+      <div class="div-block-2">
+        <a class="link-block" href="https://www.tiktok.com/@halgwrd.m"><img class="image-3" src="tiktok.png"></a>
+        <a class="link-block" href="https://t.snapchat.com/VKUkMdTz"><img class="image-3" src="snapchat.png"></a>
+      </div>
+    </section>
+
+    <div class="ad-container" style="margin-top: 20px;">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '8250cb82b2722a8e9bfb28be623d5369',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/8250cb82b2722a8e9bfb28be623d5369/invoke.js"></script>
+    </div>
+    
+    <div id="statusMsg">Searching...</div>
+    <br><br><br><br>
+
+    <div class="explore-title">Explore</div>
+    <div id="codesGrid" class="codes-grid"></div>
+    <button id="seeMoreBtn" class="see-more-btn" style="display:none;" onclick="loadMore()">See More</button>
+
+  </section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabaseClient = supabase.createClient('https://lzvetvqutuetedunkrxs.supabase.co', 'sb_publishable_0r2EnDzm8AOE_INsRWbLrQ_gnVaCiS7');
+    
+    let allCodes = [];
+    let limit = 8;
+
+    async function loadData() {
+      const { data } = await supabaseClient.from('codes').select('*').order('code_id', { ascending: false });
+      if(data) {
+        allCodes = data;
+        renderCodes();
+      }
+    }
+
+    function renderCodes() {
+      const grid = document.getElementById('codesGrid');
+      grid.innerHTML = '';
+      allCodes.slice(0, limit).forEach(item => {
+        grid.innerHTML += `<div class="code-card" onclick="window.location.href='view-code.html?id=${item.code_id}'">
+                             <h3>${item.title}</h3>
+                           </div>`;
+      });
+      document.getElementById('seeMoreBtn').style.display = (limit < allCodes.length) ? 'block' : 'none';
+    }
+
+    function loadMore() { limit += 4; renderCodes(); }
+
+    const searchInput = document.querySelector('.search-input-2');
+    const liveBox = document.getElementById('liveBox');
+    const statusMsg = document.getElementById('statusMsg');
+
+    async function liveSearch() {
+      const val = searchInput.value.trim();
+      if (val.length < 1) { liveBox.style.display = 'none'; return; }
+      const { data } = await supabaseClient.from('codes').select('code_id, title').or(`code_id.ilike.${val}%,title.ilike.%${val}%`).limit(5);
+      if (data && data.length > 0) {
+        liveBox.innerHTML = '';
+        liveBox.style.display = 'block';
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'res-item';
+          div.innerHTML = `<span>${item.title}</span> <small>#${item.code_id}</small>`;
+          div.onclick = () => { searchInput.value = item.code_id; handleSearch(); };
+          liveBox.appendChild(div);
+        });
+      } else { liveBox.style.display = 'none'; }
+    }
+
+    async function handleSearch() {
+      const query = searchInput.value.trim();
+      if (!query) return;
+      statusMsg.style.display = 'block';
+      const { data } = await supabaseClient.from('codes').select('code_id').or(`code_id.eq.${query},title.eq.${query}`).maybeSingle();
+      if (data) { 
+        window.location.href = `view-code.html?id=${data.code_id}`; 
+      } else { 
+        statusMsg.style.display = 'none'; 
+        alert('Code or Title not found!'); 
+      }
+    }
+
+    document.addEventListener('click', (e) => { if (!e.target.closest('.search-2')) liveBox.style.display = 'none'; });
+    searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSearch(); });
+
+    loadData();
+</script>
+</body>
+</html>

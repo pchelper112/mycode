@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Code</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+  <style>
+    body { font-family: sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 800px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    #title { text-align: center; font-size: 1.8rem; margin-bottom: 25px; color: #333; }
+    
+    .display-area { background: #1d1d1d; border-radius: 15px; padding: 20px; height: 300px; overflow-y: auto; }
+    
+    pre, code { 
+        margin: 0 !important; padding: 0 !important; width: 100% !important;
+        white-space: pre-wrap !important; word-break: break-word !important; 
+        overflow-wrap: break-word !important; display: block !important;
+        background: transparent !important; color: #ccc;
+    }
+
+    .action-buttons { margin-top: 30px; display: flex; gap: 15px; }
+    .btn { flex: 1; padding: 18px; border: none; border-radius: 12px; background: #000; color: white; cursor: pointer; font-weight: bold; font-size: 16px; transition: opacity 0.3s; }
+    .btn:hover { opacity: 0.8; }
+    
+    .ad-container { margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee; text-align: center; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 90px; }
+    .back-link { display: block; text-align: center; margin-top: 30px; color: #888; text-decoration: none; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="title">Loading...</h1>
+
+    <div class="display-area">
+      <pre><code id="codeBody" class="language-html"></code></pre>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn" onclick="downloadCode()">Download</button>
+      <button class="btn" onclick="copyCode()">Copy Code</button>
+    </div>
+
+    <div class="ad-container">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '8250cb82b2722a8e9bfb28be623d5369',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/8250cb82b2722a8e9bfb28be623d5369/invoke.js"></script>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Search</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <script>
+    const supabaseClient = supabase.createClient('https://lzvetvqutuetedunkrxs.supabase.co', 'sb_publishable_0r2EnDzm8AOE_INsRWbLrQ_gnVaCiS7');
+    const adLink = 'https://valuationappeared.com/i4cv3i6p?key=74967e92e8d45f41bf5b57908ac57034';
+    
+    let globalCode = ""; 
+
+    async function fetchCode() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) return;
+      const { data } = await supabaseClient.from('codes').select('*').eq('code_id', id).single();
+      if (data) {
+        globalCode = data.code_content;
+        document.getElementById('title').innerText = data.title;
+        document.getElementById('codeBody').textContent = globalCode;
+        Prism.highlightElement(document.getElementById('codeBody'));
+      }
+    }
+
+    function copyCode() {
+      window.open(adLink, '_blank');
+      navigator.clipboard.writeText(globalCode).then(() => {
+        alert("Code Copied successfully!");
+      }).catch(() => {
+        alert("Failed to copy.");
+      });
+    }
+
+    function downloadCode() {
+      window.open(adLink, '_blank');
+      const blob = new Blob([globalCode], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.getElementById('title').innerText + ".txt";
+      a.click();
+    }
+
+    fetchCode();
+  </script>
+</body>
+</html>
