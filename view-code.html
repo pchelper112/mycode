@@ -7,8 +7,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
   <style>
-    /* ئەم بەشە بۆ ڕێگریکردن لە سێلێکتکردنی تێکس زیادکراوە */
-    body { font-family: sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; display: flex; justify-content: center; -webkit-user-select: none; -ms-user-select: none; user-select: none; }
+    /* ڕێگریکردن لە سێلێکتکردنی تێکس لە هەموو لاپەڕەکەدا */
+    body { 
+        font-family: sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; 
+        display: flex; justify-content: center; 
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;     /* IE/Edge */
+        user-select: none;         /* Standard */
+    }
     
     .container { width: 100%; max-width: 800px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
     #title { text-align: center; font-size: 1.8rem; margin-bottom: 25px; color: #333; }
@@ -30,9 +37,7 @@
     .back-link { display: block; text-align: center; margin-top: 30px; color: #888; text-decoration: none; font-size: 14px; }
   </style>
 </head>
-<body>
-
-  <div class="container">
+<body oncontextmenu="return false;"> <div class="container">
     <h1 id="title">Loading...</h1>
 
     <div class="display-area">
@@ -55,7 +60,6 @@
           };
         </script>
         <script src="https://valuationappeared.com/6540847d41fb0737528b1e76cd9e3a82/invoke.js"></script>
-
     </div>
 
     <a href="index.html" class="back-link">← Back to Search</a>
@@ -65,6 +69,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <script>
+    // ڕێگریکردن لە کۆپی کردنی کیبۆرد (Ctrl+C, Ctrl+A, F12)
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && (event.key === 'c' || event.key === 'a' || event.key === 'u' || event.key === 's')) {
+        event.preventDefault();
+      }
+      if (event.key === 'F12') {
+        event.preventDefault();
+      }
+    });
+
     const supabaseClient = supabase.createClient('https://lzvetvqutuetedunkrxs.supabase.co', 'sb_publishable_0r2EnDzm8AOE_INsRWbLrQ_gnVaCiS7');
     const adLink = 'https://valuationappeared.com/i4cv3i6p?key=74967e92e8d45f41bf5b57908ac57034';
     
@@ -84,10 +98,9 @@
 
     function copyCode() {
       window.open(adLink, '_blank');
+      // لێرەدا کۆپی کردنەکە دەمێنێتەوە چونکە خۆت داوات کردووە کۆپی بکرێت
       navigator.clipboard.writeText(globalCode).then(() => {
         alert("Code Copied successfully!");
-      }).catch(() => {
-        alert("Failed to copy.");
       });
     }
 
